@@ -24,5 +24,16 @@ pipeline {
         }
       }
     }
+    stage('Helm Deployment') {
+      steps {
+        script {
+          container('helm') {
+            // Init authentication and config for your kubernetes cluster
+            sh("helm init --client-only --skip-refresh")
+            sh("helm upgrade --install --wait jenkins-test-k8s-pipeline ./helm --namespace default")
+          }
+        }
+      }
+    }
   }
 }
