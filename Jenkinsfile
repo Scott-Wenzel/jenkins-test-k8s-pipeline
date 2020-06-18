@@ -17,7 +17,7 @@ pipeline {
       steps {
         container('docker') { 
           withCredentials([usernamePassword(credentialsId: '68527666-ec6d-4c9a-afb2-a9e7e9e78431', usernameVariable: 'USER', passwordVariable: 'TOKEN')]) {
-            sh "docker login -u $USER -p $TOKEN"     
+            sh "docker login -u $USER -p $TOKEN"  // Login   
             sh "docker build -t jwenzel/jenkins-test-k8s-pipeline:dev ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container,
             sh "docker push jwenzel/jenkins-test-k8s-pipeline:dev"        // which is just connecting to the host docker deaemon
           }
