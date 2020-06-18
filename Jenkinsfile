@@ -14,8 +14,6 @@ pipeline {
       }
     }
     stage('Build Docker Image') {
-      withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
-      }
       steps {
         container('docker') { 
           withCredentials([usernamePassword(credentialsId: '68527666-ec6d-4c9a-afb2-a9e7e9e78431', usernameVariable: 'USER', passwordVariable: 'TOKEN')]) {
