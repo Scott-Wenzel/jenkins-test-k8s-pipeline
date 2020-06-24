@@ -28,16 +28,26 @@ pipeline {
                 }
             }
         }
-        stage('Test kubectl') {
+        stage('Deploy via Helm') {
             steps {
-                container('kubectl') {
+                container('helm') {
                     withKubeConfig([credentialsId: 'kubeconfig']) {
-                        echo "Testing kubectl"
-                        sh 'kubectl get pods --all-namespaces -o wide'
+                        sh "helm upgrade --install --force jenkins-test-k8s-pipeline-${env.BRANCH_NAME} --namespace=test jenkins-test-k8s-pipeline-${env.BRANCH_NAME} --set image.repository=jenkins-test-k8s-pipeline --set image.tag=${env.DOCKERTAG} ./helm"
                     }                    
                 }
             }
-        }
+       }
+        
+//        stage('Test kubectl') {
+//            steps {
+//                container('kubectl') {
+//                    withKubeConfig([credentialsId: 'kubeconfig']) {
+//                        echo "Testing kubectl"
+//                        sh 'kubectl get pods --all-namespaces -o wide'
+//                    }                    
+//                }
+//            }
+//       }
     }
 }
 
