@@ -31,10 +31,8 @@ pipeline {
         stage('Test kubectl') {
             steps {
                 container('kubectl') {
-                    withKubeConfig([credentialsId: 'kubeconfig']) {
-                        echo "Testing Kubectl"
-                        sh "kubectl get pods --all-namespaces -o wide"
-                        //sh("helm upgrade --install --force jenkins-test-k8s-pipeline --namespace test --set image.tag=${dockerTag} ./helm")
+                    echo "Testing kubectl"
+                    sh "kubectl get pods --all-namespaces -o wide"
                     }
                 }
             }
