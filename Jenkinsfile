@@ -32,7 +32,7 @@ pipeline {
             steps {
                 container('kubectl') {
                     echo "Testing kubectl"
-                    sh "kubectl get pods --all-namespaces -o wide"
+                    kubectl get pods --all-namespaces -o wide
                     
                 }
             }
