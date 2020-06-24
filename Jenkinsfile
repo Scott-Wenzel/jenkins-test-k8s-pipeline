@@ -31,9 +31,10 @@ pipeline {
         stage('Test kubectl') {
             steps {
                 container('kubectl') {
-                    echo "Testing kubectl"
-                    kubectl get pods --all-namespaces -o wide
-                    
+                    withKubeConfig([credentialsId: 'kubeconfig']) {
+                        echo "Testing kubectl"
+                        sh 'kubectl get pods --all-namespaces -o wide'
+                    }                    
                 }
             }
         }
