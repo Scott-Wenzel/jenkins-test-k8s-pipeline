@@ -28,6 +28,15 @@ spec:
           cpu: "125m"
         limits:
           memory: "500M"
+    - name: kubectl
+      image: bitnami/kubectl:1.16
+      command: ["tail", "-f", "/dev/null"]
+      resources:  # limits the resources your build contaienr
+        requests:
+          memory: "125M"
+          cpu: "125m"
+        limits:
+          memory: "500M"          
   volumes:
     - name: docker
       hostPath:
