@@ -32,7 +32,7 @@ pipeline {
             steps {
                 container('helm') {
                     withKubeConfig([credentialsId: 'kubeconfig']) {
-                        sh "helm upgrade --install --force jenkins-test-k8s-pipeline-${env.BRANCH_NAME} --namespace=jenkins-test-k8s-pipeline-${env.BRANCH_NAME} --set image.repository=jenkins-test-k8s-pipeline --set image.tag=${env.DOCKERTAG} ./helm"
+                        sh "helm upgrade --install --force jenkins-test-k8s-pipeline --namespace=jenkins-test-k8s-pipeline --set image.repository=jwenzel/jenkins-test-k8s-pipeline --set image.tag=${env.DOCKERTAG} ./helm"
                     }                    
                 }
             }
