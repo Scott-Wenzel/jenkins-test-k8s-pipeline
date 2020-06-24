@@ -9,8 +9,7 @@ pipeline {
     environment {
         DOCKER_REPO_CREDS = credentials('68527666-ec6d-4c9a-afb2-a9e7e9e78431')
         KUBECONFIG = credentials('kubeconfig')
-        gitCommit = findGitCommit()
-        DOCKERTAG = "${env.BUILD_NUMBER}-${gitCommit}"
+        DOCKERTAG = "${env.BUILD_NUMBER}"
     }
     stages {
         stage('Build') {
